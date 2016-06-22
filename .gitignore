@@ -2,7 +2,8 @@ var/bootstrap.php.cache
 var/cache/*
 var/logs/*
 var/sessions/*
-vendor
+vendor/*
+!vendor/.gitkeep
 composer.phar
 
 # Elastic Beanstalk Files
