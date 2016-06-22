@@ -12,7 +12,8 @@
       {% stylesheets
         'lib/bootstrap-dist/css/bootstrap.min.css'
         'css/ie10-viewport-bug-workaround.css'
-        'css/sticky-footer-navbar.css'%}
+        'css/sticky-footer-navbar.css'
+        'css/navbar.css' %}
         <link href="{{ asset_url }}" rel="stylesheet" />
       {% endstylesheets %}
 
@@ -46,6 +47,38 @@
               <li {{ route starts with '/how-it-works' ? 'class="active"' }}><a href="{# path('how_it_works') #}">How It Works</a></li>
               <li {{ route starts with '/create-account' ? 'class="active"' }}><a href="{# path('create_account') #}">Create an Account</a></li>
               <li><a href="http://www.baseballtourneys.com/">Image Cred</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="visible-md"><p class="navbar-text">Have an Account?</p></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+                <ul id="login-dp" class="dropdown-menu">
+                  <li>
+                     <div class="row">
+                        <div class="col-md-12">
+                          <form action="{{ path("fos_user_security_check") }}" method="post">
+                            <div class="form-group">
+                               <label for="username">E-Mail Address</label>
+                               <input type="text" class="form-control" name="_username" required>
+                            </div>
+                            <div class="form-group">
+                               <label for="password">Password</label>
+                               <input type="password" class="form-control" name="_password" required>
+                               <div class="help-block text-right"><a href="#" data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a></div>
+                            </div>
+                            <div class="form-group">
+                              <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="bottom text-center">
+                          <a href="{# path('create_account') #}"><b>Create an Account</b></a>
+                        </div>
+                     </div>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
