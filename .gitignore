@@ -4,6 +4,7 @@ var/logs/*
 var/sessions/*
 vendor/*
 composer.phar
+app/config/parameters.yml
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
