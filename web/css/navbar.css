@@ -1,0 +1,83 @@
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+.navbar {
+  background-color: #0A2238;
+  border-color: #000A13;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #f9f9f9 !important;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: #ffffff !important;
+  background-color: #111E29;
+}
+
+.navbar-default .navbar-brand {
+  color: #f9f9f9;
+}
+
+.navbar-default .navbar-nav>.active>a {
+  background-color: #375775;
+}
+
+.navbar-default .navbar-nav>.active>a:hover {
+  color: #ffffff !important;
+  background-color: #111E29;
+}
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+.navbar-brand img {
+  max-width: 150px;
+  max-height: 30px;
+  display: inline-block;
+}
+
+/* Classes for NavBar Login Form */
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color: #FFFFFF;
+}
+#login-dp .help-block{
+    font-size:12px
+}
+#login-dp .bottom{
+    background-color: #FFFFFF;
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
