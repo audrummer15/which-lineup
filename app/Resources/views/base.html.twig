@@ -44,39 +44,50 @@
             <ul class="nav navbar-nav">
               {% set route = app.request.getPathInfo %}
               <li {{ route == '/' ? 'class="active"' }}><a href="{{ path('homepage') }}">Home</a></li>
-              <li {{ route starts with '/how-it-works' ? 'class="active"' }}><a href="{# path('how_it_works') #}">How It Works</a></li>
-              <li {{ route starts with '/create-account' ? 'class="active"' }}><a href="{# path('create_account') #}">Create an Account</a></li>
+              <li {{ route starts with '/register' ? 'class="active"' }}><a href="{{ path('fos_user_registration_register') }}">Create an Account</a></li>
               <li><a href="http://www.baseballtourneys.com/">Image Cred</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="visible-md"><p class="navbar-text">Have an Account?</p></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
-                <ul id="login-dp" class="dropdown-menu">
-                  <li>
-                     <div class="row">
-                        <div class="col-md-12">
-                          <form action="{{ path("fos_user_security_check") }}" method="post">
-                            <div class="form-group">
-                               <label for="username">E-Mail Address</label>
-                               <input type="text" class="form-control" name="_username" required>
-                            </div>
-                            <div class="form-group">
-                               <label for="password">Password</label>
-                               <input type="password" class="form-control" name="_password" required>
-                               <div class="help-block text-right"><a href="#" data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a></div>
-                            </div>
-                            <div class="form-group">
-                              <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
-                              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                            </div>
-                          </form>
-                        </div>
-                        <div class="bottom text-center">
-                          <a href="{# path('create_account') #}"><b>Create an Account</b></a>
-                        </div>
-                     </div>
-                  </li>
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">My Teams</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{{ path("fos_user_security_logout") }}">Logout</a></li>
+                  </ul>
+                </li>
+              {% else %}
+                <li class="visible-md"><p class="navbar-text">Have an Account?</p></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+                  <ul id="login-dp" class="dropdown-menu">
+                    <li>
+                       <div class="row">
+                          <div class="col-md-12">
+                            <form action="{{ path("fos_user_security_check") }}" method="post">
+                              <div class="form-group">
+                                 <label for="username">E-Mail Address</label>
+                                 <input type="text" class="form-control" name="_username" required>
+                              </div>
+                              <div class="form-group">
+                                 <label for="password">Password</label>
+                                 <input type="password" class="form-control" name="_password" required>
+                                 <div class="help-block text-right"><a href="#" data-toggle="modal" data-target="#forgotPassword">Forgot Password?</a></div>
+                              </div>
+                              <div class="form-group">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="bottom text-center">
+                            <a href="{{ path('fos_user_registration_register') }}"><b>Register</b></a>
+                          </div>
+                       </div>
+                    </li>
+                  {% endif %}
                 </ul>
               </li>
             </ul>
