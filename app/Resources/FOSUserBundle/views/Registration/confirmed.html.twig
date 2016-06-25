@@ -3,8 +3,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+<div class="container"> <!-- main content container -->
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+      {% if targetUrl %}
+      <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+      {% else %}
+      <p>Visit <a href="{{ path('my_teams') }}">My Teams</a> to get started with your lineups!</p>
     {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock fos_user_content %}
