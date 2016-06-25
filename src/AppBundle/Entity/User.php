@@ -24,4 +24,20 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        $this->username = $email;
+
+        return $this;
+    }
+    
+    public function setEmailCanonical($emailCanonical)
+    {
+        parent::setEmailCanonical($emailCanonical);
+        $this->usernameCanonical = $emailCanonical;
+
+        return $this;
+    }
 }
