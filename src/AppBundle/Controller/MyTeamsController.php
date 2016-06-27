@@ -13,7 +13,18 @@ class MyTeamsController extends Controller
      */
     public function myTeamsAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('my-teams/my-teams.html.twig');
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $teams = $em->getRepository('AppBundle:Team')->findBy(
+            array(
+                'user' => $user->getId()
+            )
+        );
+
+        return $this->render('my-teams/my-teams.html.twig', [
+          'teams' => $teams
+        ]);
     }
 }

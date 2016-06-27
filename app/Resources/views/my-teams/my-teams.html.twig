@@ -3,5 +3,34 @@
 {% block title %}Which Lineup? My Teams{% endblock %}
 
 {% block body %}
-
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>My Teams</h1>
+      <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>Players</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          {% for team in teams %}
+            <tr>
+              <td>{{ team.getName() }}</td>
+              <td>{{ team.getPlayers()|length }}</td>
+              <td><button class="btn btn-primary">Manage</button> <button class="btn btn-danger">Delete</button></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tr>
+          <td><input type="text"></td>
+          <td>0</td>
+          <td>
+            <button class="btn btn-success">Add Team</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}
