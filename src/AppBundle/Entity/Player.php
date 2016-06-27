@@ -20,6 +20,20 @@ class Player
     private $name;
 
     /**
+     * @var decimal
+     *
+     * @ORM\Column(name="batting_average", type="decimal", scale=3, precision=4)
+     */
+    private $batting_average = 1.000;
+
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="slugging_average", type="decimal", scale=3, precision=4)
+     */
+    private $slugging_average = 1.000;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="player_id", type="integer")
@@ -37,7 +51,7 @@ class Player
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     * @ORM\OneToMany(targetEntity="AtBat", mappedBy="player")
+     * @ORM\OneToMany(targetEntity="AtBat", mappedBy="player", cascade={"persist", "remove"})
      */
     private $atbats;
 
@@ -118,6 +132,7 @@ class Player
     public function addAtbat(\AppBundle\Entity\AtBat $atbat)
     {
         $this->atbats[] = $atbat;
+        $atbat->setPlayer($this);
 
         return $this;
     }
@@ -140,5 +155,53 @@ class Player
     public function getAtbats()
     {
         return $this->atbats;
+    }
+
+    /**
+     * Set battingAverage
+     *
+     * @param string $battingAverage
+     *
+     * @return Player
+     */
+    public function setBattingAverage($battingAverage)
+    {
+        $this->batting_average = $battingAverage;
+
+        return $this;
+    }
+
+    /**
+     * Get battingAverage
+     *
+     * @return string
+     */
+    public function getBattingAverage()
+    {
+        return $this->batting_average;
+    }
+
+    /**
+     * Set sluggingAverage
+     *
+     * @param string $sluggingAverage
+     *
+     * @return Player
+     */
+    public function setSluggingAverage($sluggingAverage)
+    {
+        $this->slugging_average = $sluggingAverage;
+
+        return $this;
+    }
+
+    /**
+     * Get sluggingAverage
+     *
+     * @return string
+     */
+    public function getSluggingAverage()
+    {
+        return $this->slugging_average;
     }
 }

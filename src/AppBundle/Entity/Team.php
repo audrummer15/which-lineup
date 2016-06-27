@@ -30,7 +30,7 @@ class Team
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     * @ORM\OneToMany(targetEntity="Player", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="team", cascade={"persist", "remove"})
      */
     private $players;
 
@@ -84,6 +84,7 @@ class Team
     public function addPlayer(\AppBundle\Entity\Player $player)
     {
         $this->players[] = $player;
+        $player->setTeam($this);
 
         return $this;
     }

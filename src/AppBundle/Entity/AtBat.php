@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AtBat
 {
+    const HIT_WALK = 0;
+    const HIT_SINGLE = 1;
+    const HIT_DOUBLE = 2;
+    const HIT_TRIPLE = 3;
+    const HIT_HOMERUN = 4;
+    const HIT_STRIKEOUT = 5;
+
     /**
      * @var int
      *
