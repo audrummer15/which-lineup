@@ -22,11 +22,19 @@
             </tr>
           {% endfor %}
         </tbody>
+        <form method="post">
         <tr>
-          <td><input type="text"></td>
+          <td>
+            {{ form_widget(teamForm.name,
+              { 'attr':
+                {'class': 'form-control'}
+              })
+            }}
+          </td>
           <td>0</td>
           <td>
-            <button class="btn btn-success">Add Team</button>
+            {{ form_rest(teamForm) }}
+            <button type="submit" class="btn btn-success">Add Team</button>
           </td>
         </tr>
       </table>

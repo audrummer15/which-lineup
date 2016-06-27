@@ -37,6 +37,7 @@ class Team
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToOne(targetEntity="User", inversedBy="teams")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
@@ -115,5 +116,29 @@ class Team
     public function getTeamId()
     {
         return $this->team_id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Team
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

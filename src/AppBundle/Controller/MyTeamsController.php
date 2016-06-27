@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Team;
+use AppBundle\Form\Type\TeamType;
 
 class MyTeamsController extends Controller
 {
@@ -23,8 +25,19 @@ class MyTeamsController extends Controller
             )
         );
 
+        $newTeam = new Team();
+        $teamForm = $this->createForm(TeamType::class, $newTeam);
+        $teamForm->handleRequest($request);
+        if ($teamForm->isSubmitted() && $teamForm->isValid()) {
+            $user->addTeam($newTeam);
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('my_teams');
+        }
+
         return $this->render('my-teams/my-teams.html.twig', [
-          'teams' => $teams
+          'teams' => $teams,
+          'teamForm' => $teamForm->createView()
         ]);
     }
 }

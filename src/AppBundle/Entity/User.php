@@ -21,7 +21,7 @@ class User extends BaseUser
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     * @ORM\OneToMany(targetEntity="Team", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="user", cascade={"persist", "remove"})
      */
     private $teams;
 
@@ -59,7 +59,8 @@ class User extends BaseUser
     public function addTeam(\AppBundle\Entity\Team $team)
     {
         $this->teams[] = $team;
-
+        $team->setUser($this);
+        
         return $this;
     }
 
