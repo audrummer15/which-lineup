@@ -40,7 +40,7 @@ class AtBat
      *
      * @ORM\Column(name="rbi", type="smallint")
      */
-    private $rbi;
+    private $rbi = 0;
 
     /**
      * @var \Doctrine\Common\Collections\Collection

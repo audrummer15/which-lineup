@@ -19,10 +19,19 @@
           {% for player in team.getPlayers() %}
             <tr>
               <td>{{ player.getName() }}</td>
-              <td>{{ player.getAtbats()|length }}</td>
-              <td>{{ player.getBattingAverage() }}</td>
-              <td>{{ player.getSluggingAverage() }}</td>
-              <td><button class="btn btn-primary">Manage</button> <button class="btn btn-danger">Delete</button></td>
+              <td id="number-at-bats-{{ player.getPlayerId() }}">{{ player.getAtbats()|length }}</td>
+              <td id="batting-average-{{ player.getPlayerId() }}">{{ player.getBattingAverage() }}</td>
+              <td id="slugging-average-{{ player.getPlayerId() }}">{{ player.getSluggingAverage() }}</td>
+              <td>
+                <button class="btn btn-primary" onclick="addSingle({{ player.getPlayerId() }})">1B</button>
+                <button class="btn btn-primary" onclick="addDouble({{ player.getPlayerId() }})">2B</button>
+                <button class="btn btn-primary" onclick="addTriple({{ player.getPlayerId() }})">3B</button>
+                <button class="btn btn-primary" onclick="addHomerun({{ player.getPlayerId() }})">HR</button>
+                <button class="btn btn-primary" onclick="addWalk({{ player.getPlayerId() }})">BB</button>
+                <button class="btn btn-primary" onclick="addStrikeout({{ player.getPlayerId() }})">SO</button>
+
+                <button class="btn btn-danger">Delete</button>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
@@ -47,4 +56,79 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <script>
+    var addSingleRoute = "{{ path('add_single', { 'id': "PLAYER_ID"}) }}";
+    var addDoubleRoute = "{{ path('add_double', { 'id': "PLAYER_ID"}) }}";
+    var addTripleRoute = "{{ path('add_triple', { 'id': "PLAYER_ID"}) }}";
+    var addHomerunRoute = "{{ path('add_homerun', { 'id': "PLAYER_ID"}) }}";
+    var addWalkRoute = "{{ path('add_walk', { 'id': "PLAYER_ID"}) }}";
+    var addStrikeoutRoute = "{{ path('add_strikeout', { 'id': "PLAYER_ID"}) }}";
+
+    function addSingle(playerId) {
+      $.ajax({
+        url: addSingleRoute.replace("PLAYER_ID", playerId),
+        success: function (data) {
+          updateAverages(data, playerId);
+        }
+      });
+    }
+
+    function addDouble(playerId) {
+      $.ajax({
+        url: addDoubleRoute.replace("PLAYER_ID", playerId),
+        success: function (data) {
+          updateAverages(data, playerId);
+        }
+      });
+    }
+
+    function addTriple(playerId) {
+      $.ajax({
+        url: addTripleRoute.replace("PLAYER_ID", playerId),
+        success: function (data) {
+          updateAverages(data, playerId);
+        }
+      });
+    }
+
+    function addHomerun(playerId) {
+      $.ajax({
+        url: addHomerunRoute.replace("PLAYER_ID", playerId),
+        success: function (data) {
+          updateAverages(data, playerId);
+        }
+      });
+    }
+
+    function addWalk(playerId) {
+      $.ajax({
+        url: addWalkRoute.replace("PLAYER_ID", playerId),
+        success: function (data) {
+          updateAverages(data, playerId);
+        }
+      });
+    }
+
+
+    function addStrikeout(playerId) {
+      $.ajax({
+        url: addStrikeoutRoute.replace("PLAYER_ID", playerId),
+        success: function (data) {
+          updateAverages(data, playerId);
+        }
+      });
+    }
+
+    function updateAverages(data, playerId) {
+      $('#batting-average-' + playerId).text(data.batting_average);
+      $('#slugging-average-' + playerId).text(data.slugging_average);
+      $('#number-at-bats-' + playerId).text(data.number_at_bats);
+    }
+
+  </script>
 {% endblock %}
